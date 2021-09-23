@@ -11,10 +11,9 @@ A gnome shell extension. Provides seperate menu for power options. To use `Hiber
 1. install your prefered extension manager gnome-shell-extension-prefs or gnome-tweaks
 1. Start your extension manager, find the extension and enable it.
 
-Note: some codes are copied from [Hibernate Status Button][2] while others from [gnome shell 3.28][3]
+Note: some codes are copied from [Hibernate Status Button][2]
 
 To manually enable Hibernate option copy `UUID` of swap partition from `/etc/fstab` and edit `/etc/default/grub` to include `GRUB_CMDLINE_LINUX="resume=UUID=`YOUR_SWAP_UUID` `whatever there was before`"`
 
 [1]: https://askubuntu.com/questions/1034185/ubuntu-18-04-cant-resume-after-hibernate/1064114#1064114
 [2]: https://github.com/arelange/gnome-shell-extension-hibernate-status
-[3]: https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-28/js/ui/status/system.js#L230
