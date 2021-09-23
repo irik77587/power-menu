@@ -1,0 +1,10 @@
+{
+  "description": "Add a power menu.",
+  "name": "Power Menu",
+  "shell-version":  [
+    "3.36"
+  ],
+  "url": "https://github.com/irik77587/power-menu",
+  "uuid": "power-menu@irik77587",
+  "version": 1
+}

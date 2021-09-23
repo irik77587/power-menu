@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.power-menu" path="/org/gnome/shell/extensions/power-menu/">
+    <!-- See also: https://developer.gnome.org/glib/stable/gvariant-format-strings.html -->
+    <key name="hibernate-enabled" type="b">
+      <default>false</default>
+      <summary>Create clickable Hibernate button</summary>
+    </key>
+    <key name="hybrid-sleep-enabled" type="b">
+      <default>false</default>
+      <summary>Create clickable HybridSleep button</summary>
+    </key>
+    <key name="hibernate-capable" type="b">
+      <default>false</default>
+      <summary>Test if capable to Hibernate</summary>
+    </key>
+    <key name="hybrid-sleep-capable" type="b">
+      <default>false</default>
+      <summary>Test if capable to Hybrid Sleep</summary>
+    </key>
+  </schema>
+</schemalist>
+
