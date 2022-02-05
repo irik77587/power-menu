@@ -1,5 +1,5 @@
-# power-menu
-A gnome shell extension. Provides seperate menu for power options. The old hybrid sleep may not function properly. Try the new hybrid sleep which is actually suspend-then-hibernate. To use `Hibernate` [manually enable][1] it.
+# Power Menu
+A gnome shell extension. Provides seperate menu for power options. To use `Hibernate` [manually enable][1] it.
 
 ### To install any extension
 1. unzip the zip file
@@ -11,14 +11,35 @@ A gnome shell extension. Provides seperate menu for power options. The old hybri
 1. install your prefered extension manager gnome-shell-extension-prefs or gnome-tweaks
 1. Start your extension manager, find the extension and enable it.
 
-Note: some codes are copied from [Hibernate Status Button][2] while others from [gnome shell 3.28][3]
+Note: some codes are copied from [Hibernate Status Button][2]
 
-### Screenshots
+To manually enable Hibernate option copy `UUID` of swap partition from `/etc/fstab` and edit `/etc/default/grub` to include `GRUB_CMDLINE_LINUX="`whatever there was before` resume=UUID=`YOUR_SWAP_UUID`"`
 
+## To prevent grub from record fail: [Solution][3]
+### /lib/systemd/system-sleep/10_grub
+```
+#!/bin/sh
+
+case $1 in
+        post)
+                grub-editenv - unset recordfail
+                ;;
+esac
+```
+## To permit hibernation in PolicyKit
+### /etc/polkit-1/localauthority/10-vendor.d/com.ubuntu.desktop.pkla
+```
+[Enable hibernate in upower]
+Identity=unix-user:*
+Action=org.freedesktop.upower.hibernate
+ResultActive=yes
+
+[Enable hibernate in logind]
+Identity=unix-user:*
+Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-key;org.freedesktop.login1;org.freedesktop.login1.hibernate-multiple-sessions;org.freedesktop.login1.hibernate-ignore-inhibit
+ResultActive=yes
+```
 
 [1]: https://askubuntu.com/questions/1034185/ubuntu-18-04-cant-resume-after-hibernate/1064114#1064114
 [2]: https://github.com/arelange/gnome-shell-extension-hibernate-status
-[3]: https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/gnome-3-28/js/ui/status/system.js#L230
-![Screenshot from 2021-09-26 14-10-25](https://user-images.githubusercontent.com/48862812/134799560-08674101-794a-48bf-bf97-ff4474e4bfec.png)
-![Screenshot from 2021-09-26 14-09-50](https://user-images.githubusercontent.com/48862812/134799568-773c0b2f-19ea-471b-81ef-196bdd86f735.png)
-![Screenshot from 2021-09-26 14-11-00](https://user-images.githubusercontent.com/48862812/134799572-d2acc52a-a838-4e50-b74b-a01daabe86cf.png)
+[3]: https://askubuntu.com/questions/967816/after-enabling-hibernate-grub-menu-appears-on-start-up-with-30s-timeout
